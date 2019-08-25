@@ -4,6 +4,8 @@ Idefix is a PBX system for Voice Wallets account generation and user authenticat
 
 ⚠️ **Be aware that voice channels are insecure channels, this system is intended to be use in emergent economies where users can't afford owning smartphones or internet connection, so the usage is limited to low value ammount of storaging/transacting** ⚠️
 
+### Twitter: https://twitter.com/VozWallet
+
 ## Inspiration
 
 Crypto is still not inclusive as it shall be!
