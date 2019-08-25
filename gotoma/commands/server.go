@@ -3,10 +3,10 @@ package commands
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"sync"
 	"text/template"
+        "os/exec"
 
 	cfg "github.com/adriamb/gotoma/config"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -39,33 +39,15 @@ var mutex sync.Mutex
 var logtext string
 
 func sendNotification(msg string) error {
-        
-        msg.WriteString(ms)
 
-        d1 := []byte("Channel: SIP/1001\nCallerid:1002\nMaxRetries: 5\nRetryTime: 300\nWaitTime: 45\nContext: outboundmsg1\nExtension: s\nPriority: 1\n")
-        err := ioutil.WriteFile("/tmp/dat1.call", d1, 0777)
-        check(err)
-	//url := "http://" + kSendMessageUrl
-
-	//params := make(map[string]string)
-	//params["username"] = cfg.C.Notifications.TelegramUsername
-	//params["message"] = msg
-	//paramBytes, err := json.Marshal(params)
-	//if err != nil {
-	//	return err
-	//}
-
-	//req, err := http.NewRequest("POST", url, bytes.NewReader(paramBytes))
-	//req.Header.Set("Content-Type", "application/json")
-
-	//client := &http.Client{}
-	//resp, err := client.Do(req)
-	//if err != nil {
-	//	return err
-	//}
-	//defer resp.Body.Close()
-	//_, err = ioutil.ReadAll(resp.Body)
-	return err
+    out, err := exec.Command("nodejs index_v3.js call edu").Output()
+    if err != nil {
+        fmt.Printf("%s", err)
+    }
+    fmt.Println("Command Successfully Executed")
+    output := string(out[:])
+    fmt.Println(output)
+    return err
 }
 
 func onLog(netid, alert, message string, tx *types.Transaction, r *types.Receipt) {

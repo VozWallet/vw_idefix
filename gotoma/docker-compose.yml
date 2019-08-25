@@ -6,5 +6,5 @@ services:
         ports:
            - 8080:8080
         volumes:
-           - /root/gotoma/config.yml:/app/config.yaml
+           - $PWD/config.yml:/app/config.yaml
            - /var/spool/asterisk/outgoing/:/tmp/
